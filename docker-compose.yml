@@ -1,11 +1,5 @@
 version: '3.4'
 services:
-  client:
-    image: node
-    ports:
-      - 3000:3000
-    volumes:
-      - ./client:.
   db:
     image: postgres
     restart: always
