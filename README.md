@@ -7,7 +7,7 @@ This repository contains the solution for CSI2132 course project.
 | Name          | Student Number |
 | ------------- | -------------- |
 | Stephen Chen  | TODO           |
-| Keith Tang    | TODO           |
+| Keith Tang    | 300014176      |
 | Yong Lin Wang | 300065862      |
 
 ## Get Started
