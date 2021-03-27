@@ -1,5 +1,13 @@
 version: '3.4'
 services:
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./server/src:/usr/src/app/src
   db:
     image: postgres
     restart: always

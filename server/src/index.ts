@@ -15,11 +15,6 @@ app.use('/', RootRouter);
 
 app.use('/hotel-brands', BrandsRouter);
 
-app.use('/hotels');
-app.use('/customers');
-app.use('/employees');
-app.use('/bookings');
-
 app.listen(port, () => {
   return console.log(`Server is listening on ${port}`);
 });
