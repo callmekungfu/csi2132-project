@@ -17,7 +17,7 @@ Docker is required for this project, please download Docker Desktop from their w
 
 ### Commands
 
-#### Start
+#### Start database & servers
 
 To start the database and migrate all database changes, run the following command.
 
@@ -36,21 +36,3 @@ docker-compose up flyway
 ```
 
 This will apply all sql database scripts on your database.
-
-#### Start Server (will be changed)
-
-To start the API server, run the following command.
-
-```
-cd /server
-yarn dev
-```
-
-#### Start Front-end dev (will be changed)
-
-To start the front-end dev environment, run the following command.
-
-```
-cd /client
-yarn start
-```
