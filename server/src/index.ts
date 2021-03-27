@@ -1,12 +1,24 @@
 import express from 'express';
-import { rootHandler, helloHandler } from './handlers';
-import BrandsRouter from './handlers/brand-handler';
+
+import BrandsRouter from './handlers/hotel-brands/handler';
+import RootRouter from './handlers/root/handler';
+import { defaultErrorResponse, logErrors } from './middlewares/error-handler';
+
 const app = express();
 const port = process.env.PORT || '8000';
 
-app.get('/', rootHandler);
+app.use(express.json());
+app.use(logErrors);
+app.use(defaultErrorResponse);
 
-app.use('/brands', BrandsRouter);
+app.use('/', RootRouter);
+
+app.use('/hotel-brands', BrandsRouter);
+
+app.use('/hotels');
+app.use('/customers');
+app.use('/employees');
+app.use('/bookings');
 
 app.listen(port, () => {
   return console.log(`Server is listening on ${port}`);
