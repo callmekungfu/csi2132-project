@@ -17,11 +17,40 @@ Docker is required for this project, please download Docker Desktop from their w
 
 ### Commands
 
-To start the database and migrate all changes, run the following command.
+#### Start
+
+To start the database and migrate all database changes, run the following command.
 
 ```
-docker-compose up db -d
+docker-compose up
+```
+
+If you database is still empty after starting the database, run the command in [Migrate database changes](#Migrate-database-changes)
+
+#### Migrate database changes
+
+To apply any migrations you made to the database run the following command.
+
+```
 docker-compose up flyway
 ```
 
-if `docker-compose up flyway` fails due to PostgreSQL DB not ready, just run it a few seconds after.
+This will apply all sql database scripts on your database.
+
+#### Start Server (will be changed)
+
+To start the API server, run the following command.
+
+```
+cd /server
+yarn dev
+```
+
+#### Start Front-end dev (will be changed)
+
+To start the front-end dev environment, run the following command.
+
+```
+cd /client
+yarn start
+```
