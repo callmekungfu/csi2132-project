@@ -7,7 +7,7 @@ export const DB = knex({
     password: 'password',
     port: 5432,
     database: 'project',
-    host: 'localhost',
+    host: 'db',
   },
 });
 

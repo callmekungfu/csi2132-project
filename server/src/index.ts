@@ -8,13 +8,13 @@ const app = express();
 const port = process.env.PORT || '8000';
 
 app.use(express.json());
-app.use(logErrors);
-app.use(defaultErrorResponse);
 
 app.use('/', RootRouter);
 
 app.use('/hotel-brands', BrandsRouter);
 
+app.use(logErrors);
+app.use(defaultErrorResponse);
 app.listen(port, () => {
   return console.log(`Server is listening on ${port}`);
 });
