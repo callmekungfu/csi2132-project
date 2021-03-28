@@ -1,12 +1,43 @@
-import React from 'react';
-import { Router } from 'react-router';
+import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import BookingPage from './components/BookingPage';
+import CustomerPage from './components/CustomerPage';
 import HomePage from './components/pages/HomePage';
 
 function App() {
   return (
-    <Router>
-      <HomePage/>
-    </Router>
+    <div>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/check-in">check-in</Link>
+              </li>
+              <li>
+                <Link to="/booking">Booking</Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/check-in">
+              <BookingPage />
+            </Route>
+            <Route path="/booking">
+              <CustomerPage />
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </div>
   );
 }
 
