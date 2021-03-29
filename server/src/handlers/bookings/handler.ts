@@ -60,4 +60,31 @@ router.get('/:bookingId', async (req, res, next) => {
   }
 });
 
+router.put('/:bookingId/check-in', async (req, res, next) => {
+  try {
+    const { bookingId } = req.params;
+
+    if (!bookingId) {
+      next(
+        new BadRequestError(
+          `Booking id is required but missing from the request`,
+        ),
+      );
+      return;
+    }
+
+    const updates: Record<string, any> = {
+      checked_in_staff: req.body.employee_id,
+      checked_in: true,
+    };
+
+    const data = await DB('bookings')
+      .where('booking_id', '=', +bookingId)
+      .update(updates, ['booking_id']);
+    res.json(data);
+  } catch (e) {
+    next(e);
+  }
+});
+
 export default router;
