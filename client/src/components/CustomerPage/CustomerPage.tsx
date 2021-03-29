@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton'
+
 
 const HeaderTitle = styled.h1`
   text-align: center;
@@ -14,18 +12,11 @@ const HeaderTitle = styled.h1`
 const Container = styled.div`
   height: 700px;
   width: 100%;
-  background: pink;
   display: flex;
   justify-content: space-evenly;
 `
 
-const CenterBox = styled.div`
-  background: lightblue;
-  width: 400px;
-  height: 500px;
-`
-
-const RightBox = styled.div`
+const SelectBox = styled.div`
   background: lightblue;
   width: 400px;
   height: 500px;
@@ -35,11 +26,11 @@ const ListTemp = styled.li`
   list-style: none;
 `
 
-const DateText = styled.p`
-  font-size: 25px;
+const BoxTitle = styled.p`
+  font-size: 20px;
 `
 
-const UserCardDisplay = () => {
+const HotelBrand = () => {
   const [user, setUser] = useState<any>([]);
 
   useEffect( () => {
@@ -47,20 +38,49 @@ const UserCardDisplay = () => {
   }, []);
 
   const fetchData = async () => {
-    await fetch(
-      'http://localhost:8000/hotel-brands'
-    )
+    await fetch('http://localhost:8000/hotel-brands')
+      .then(response => response.json())
+      .then(receivedData => setUser(receivedData.data));
+  }
+
+  const handleInput = (e) => {
+    console.log(e.target.value);
+}
+
+  return(
+    <>
+      {user.map((user,index) => {
+        return(
+        <div key={index}>
+          <ListTemp onClick={e => handleInput(e)}>{user.hotel_brand_id}</ListTemp>
+          <p>{user.brand_name}</p>
+        </div>
+        )
+      })}
+    </>
+  )
+}
+
+const HotelBrandName = () => {
+  const [user, setUser] = useState<any>([]);
+
+  useEffect( () => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    await fetch('http://localhost:8000/hotel-brands/' + '2' + '/hotels')
       .then(response => response.json())
       .then(receivedData => setUser(receivedData.data));
   }
 
   return(
     <>
-      {console.log(user)}
       {user.map((user,index) => {
         return(
         <div key={index}>
-          <ListTemp>{user.brand_name}</ListTemp>
+          <ListTemp >{user.hotel_name}</ListTemp>
+          <p>{user.office_address.address}</p>
         </div>
         )
       })}
@@ -70,38 +90,45 @@ const UserCardDisplay = () => {
 
 
 const CustomerPage = () => {
-    const [value, onChange] = useState(new Date());
 
     return(
         <>
-        <HeaderTitle>
-            Customer Page
-        </HeaderTitle>
+          <HeaderTitle>
+              Customer Page
+          </HeaderTitle>
             <Container>
-                <CenterBox>
-                    <p>Select a Hotel Brand</p>
-                    {UserCardDisplay()}
-                    <Dropdown >
-                        <DropdownButton variant="primary" id="dropdown-basic" title="Choose a Date">
-                        <Dropdown.Item>
-                        <Calendar
-                            onChange={onChange}
-                            value={value}
-                        />
-                        </Dropdown.Item>
-                        </DropdownButton>
-                    </Dropdown>
-                    <DateText>{value.toString().slice(0,16)}</DateText>
-                    <div>
-                        Name:
-                        <input type="text" name="name" />
-                    </div>
-                    <div>
-                        Room Number:
-                        <input type="text" name="room" />
-                    </div>
-                    <button>Book Room</button>
-                </CenterBox>
+                <SelectBox>
+                  <BoxTitle>Select a Hotel ID</BoxTitle>
+                  {HotelBrand()}  
+                </SelectBox>
+                <SelectBox>
+                  <BoxTitle>Select a Hotel Brand</BoxTitle>
+                  {HotelBrandName()}
+                </SelectBox>
+                <SelectBox>
+                  <BoxTitle>Available Rooms</BoxTitle>
+                  <p>--In the form of YYYY-MM-DD--</p>
+                  <input
+                    type="text"
+                    placeholder="startDate"
+                    name="startDate"
+                  />
+                  <input
+                    type="text"
+                    placeholder="endDate"
+                    name="endDate"
+                  />
+                  <p>Enter Number of Occupants</p>
+                  <input
+                    type="num"
+                    placeholder="occupants"
+                    name="occupants"
+                  />
+
+                </SelectBox>
+                <SelectBox>
+                  <BoxTitle>Room Details</BoxTitle>
+                </SelectBox>
             </Container>
         </>
     )
