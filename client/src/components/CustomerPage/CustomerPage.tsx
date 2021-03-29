@@ -69,7 +69,7 @@ const HotelBrandName = () => {
   }, []);
 
   const fetchData = async () => {
-    await fetch('http://localhost:8000/hotel-brands/' + '2' + '/hotels')
+    await fetch('http://localhost:8000/hotel-brands/' + '2/hotels')
       .then(response => response.json())
       .then(receivedData => setUser(receivedData.data));
   }
@@ -79,11 +79,38 @@ const HotelBrandName = () => {
       {user.map((user,index) => {
         return(
         <div key={index}>
-          <ListTemp >{user.hotel_name}</ListTemp>
+          <ListTemp>{user.hotel_name}</ListTemp>
           <p>{user.office_address.address}</p>
         </div>
         )
       })}
+    </>
+  )
+}
+
+const HotelRoomStuff = () => {
+  const [user, setUser] = useState<any>({});
+
+  useEffect( () => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    await fetch('http://localhost:8000/hotel-brands/' + '2/hotels/1/rooms/5')
+      .then(response => response.json())
+      .then(receivedData => setUser(receivedData));
+  }
+
+  return(
+    <>
+        <div>
+          <p>Room Id: {user.room_id}</p>
+          <p>Room Title: {user.room_title}</p>
+          <p>${user.price}</p>
+          <p>Can Extend: {user.can_extend ? "Yes" : "No"}</p>
+          <p>Ocean View: {user.ocean_view ? "Yes" : "No"}</p>
+          <p>Has AC: {user.has_ac ? "Yes" : "No"}</p>
+        </div>
     </>
   )
 }
@@ -128,6 +155,7 @@ const CustomerPage = () => {
                 </SelectBox>
                 <SelectBox>
                   <BoxTitle>Room Details</BoxTitle>
+                  {HotelRoomStuff()}
                 </SelectBox>
             </Container>
         </>
