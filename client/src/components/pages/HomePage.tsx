@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomePage = () => {
     return (
-        <div>hi this is The HomePage</div>
+        <div>Hi Welcome to Hotel Booking Service</div>
     )
 }
 

@@ -26,10 +26,10 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/check-in">
-              <BookingPage />
+              <CustomerPage />
             </Route>
             <Route path="/booking">
-              <CustomerPage />
+              <BookingPage />
             </Route>
             <Route path="/">
               <HomePage />
