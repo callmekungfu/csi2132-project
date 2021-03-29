@@ -77,3 +77,23 @@ create trigger check_if_last_hotel_phone
     before delete on hotel_phones
 for each row
     execute procedure check_if_last_hotel_phone();
+
+create or replace function check_if_last_hotel_email()
+    returns trigger as
+$$
+    begin
+        if (select count(*)
+        from hotel_emails oe
+        where oe.hotel_id = old.hotel_id) = 1 then
+            raise exception 'This is the last phone for the hotel, it cannot be removed';
+        end if;
+        return old;
+    end;
+$$ language plpgsql;
+
+drop trigger if exists check_if_last_hotel_email ON hotel_emails;
+
+create trigger check_if_last_hotel_email
+    before delete on hotel_emails
+for each row
+    execute procedure check_if_last_hotel_email();
