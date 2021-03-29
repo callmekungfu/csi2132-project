@@ -6,7 +6,10 @@ import {
   selectAllHotelBrandsQuery,
   selectHotelBrandByIdQuery,
 } from './query';
-const router = express.Router();
+
+import HotelRouter from '../hotels/handler';
+
+const router = express.Router({ mergeParams: true });
 
 router.get('/', async (_, res, next) => {
   try {
@@ -44,5 +47,7 @@ router.get('/:brandId', async (req, res, next) => {
     next(e);
   }
 });
+
+router.use('/:brandId/hotels', HotelRouter);
 
 export default router;
