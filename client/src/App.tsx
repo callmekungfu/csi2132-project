@@ -20,7 +20,7 @@ function App() {
                 <Link to="/check-in">Customer</Link>
               </li>
               <li>
-                <Link to="/booking">Booking</Link>
+                <Link to="/brands">Brands</Link>
               </li>
             </ul>
           </nav>
@@ -31,7 +31,7 @@ function App() {
             <Route path="/brands/:brandId/hotels/:hotelId/rooms">
               <RoomsPage />
             </Route>
-            <Route path="brands/:brandId/hotels">
+            <Route path="/:brandId/hotels">
               <HotelsPage />
             </Route>
             <Route path="/brands">
