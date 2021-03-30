@@ -31,7 +31,7 @@ function App() {
             <Route path="/brands/:brandId/hotels/:hotelId/rooms">
               <RoomsPage />
             </Route>
-            <Route path="/brands/:brandId/hotels">
+            <Route path="/:brandId/hotels">
               <HotelsPage />
             </Route>
             <Route path="/brands">
