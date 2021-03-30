@@ -74,7 +74,10 @@ const BrandsPage = () => {
       <Title>Brands Page</Title>
       <Grid>
         {brands?.map((b) => (
-          <Link to={`${b.hotel_brand_id}/hotels`} key={b.hotel_brand_id}>
+          <Link
+            to={`/brands/${b.hotel_brand_id}/hotels`}
+            key={b.hotel_brand_id}
+          >
             <Card>
               <h5>{b.brand_name}</h5>
               <div>
