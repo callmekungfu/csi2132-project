@@ -44,17 +44,17 @@ const HotelBrand = () => {
   }
 
   const handleInput = (e) => {
-    console.log(e.target.value);
+    console.log(e)
 }
 
   return(
     <>
       {user.map((user,index) => {
         return(
-        <div key={index}>
-          <ListTemp onClick={e => handleInput(e)}>{user.hotel_brand_id}</ListTemp>
-          <p>{user.brand_name}</p>
-        </div>
+          <div key={index}>
+            <ListTemp onClick={e => handleInput(user.hotel_brand_id)}>{user.hotel_brand_id}</ListTemp>
+            <p>{user.brand_name}</p>
+          </div>
         )
       })}
     </>
@@ -115,6 +115,31 @@ const HotelRoomStuff = () => {
   )
 }
 
+const Form = () => {
+  return(
+    <>
+      <form>
+        <input
+        type="text"
+        placeholder="startDate"
+        name="startDate"
+        />
+        <input
+        type="text"
+        placeholder="endDate"
+        name="endDate"
+        />
+        <p>Enter Number of Occupants</p>
+        <input
+        type="num"
+        placeholder="occupants"
+        name="occupants"
+        />
+      </form>
+    </>
+  )
+}
+
 
 const CustomerPage = () => {
 
@@ -135,22 +160,7 @@ const CustomerPage = () => {
                 <SelectBox>
                   <BoxTitle>Available Rooms</BoxTitle>
                   <p>--In the form of YYYY-MM-DD--</p>
-                  <input
-                    type="text"
-                    placeholder="startDate"
-                    name="startDate"
-                  />
-                  <input
-                    type="text"
-                    placeholder="endDate"
-                    name="endDate"
-                  />
-                  <p>Enter Number of Occupants</p>
-                  <input
-                    type="num"
-                    placeholder="occupants"
-                    name="occupants"
-                  />
+                  {Form()}
 
                 </SelectBox>
                 <SelectBox>
