@@ -1,7 +1,6 @@
-import React, { useRef } from 'react';
 import { Card, Container, Grid, Title } from './BrandsPage';
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 interface RoomGetBody {
