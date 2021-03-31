@@ -4,6 +4,7 @@ import CustomerPage from './components/CustomerPage';
 import BrandsPage from './components/pages/BrandsPage';
 import HomePage from './components/pages/HomePage';
 import HotelsPage from './components/pages/HotelsPage';
+import RoomDetailsPage from './components/pages/RoomDetailsPage';
 import RoomsPage from './components/pages/RoomsPage';
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
+            <Route path="/brands/:brandId/hotels/:hotelId/rooms/:roomId">
+              <RoomDetailsPage />
+            </Route>
             <Route path="/brands/:brandId/hotels/:hotelId/rooms">
               <RoomsPage />
             </Route>

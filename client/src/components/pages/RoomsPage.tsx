@@ -40,14 +40,6 @@ const RoomsPage = () => {
   const [room, setRooms] = useState<IRoom[]>();
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
-  // const [date1, setDate1] = useState('');
-  // const [date2, setDate2] = useState('');
-
-  useEffect(() => {
-    if (brandId && hotelId) {
-      loadRoomsData();
-    }
-  }, [brandId, hotelId]);
 
   const loadRoomsData = async (link?: string) => {
     const url =
@@ -101,7 +93,10 @@ const RoomsPage = () => {
 
       <Grid>
         {room?.map((b) => (
-          <Link to={'/'} key={b.room_id}>
+          <Link
+            to={`/brands/${brandId}/hotels/${hotelId}/rooms/${b.room_id}?start_date=${startDate}&end_date=${endDate}`}
+            key={b.room_id}
+          >
             <Card>
               <h5>{b.room_title}</h5>
               <div>
@@ -119,5 +114,3 @@ const RoomsPage = () => {
 };
 
 export default RoomsPage;
-
-// onChange={event => setDate1(event.target.value)}
