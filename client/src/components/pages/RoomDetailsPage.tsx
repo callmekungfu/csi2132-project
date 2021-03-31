@@ -77,7 +77,15 @@ const RoomDetailsPage = () => {
           <Title>{room.room_title}</Title>
           <RoomDetails>
             <div>
-              <div>{room.room_description}</div>
+              <strong>{room.room_description}</strong>
+              <p>Can Extend: {room.can_extend ? "Yes" : "No"}</p>
+              <p>Has Mountain View: {room.mountain_view ? "Yes" : "No"}</p>
+              <p>Has Ocean View: {room.ocean_view ? "Yes" : "No"}</p>
+              <p>Has Tv: {room.has_tv ? "Yes" : "No"}</p>
+              <p>Has AC: {room.has_ac ? "Yes" : "No"}</p>
+              <p>Has Mini Bar: {room.has_mini_bar ? "Yes" : "No"}</p>
+              <p>Has Hairdryer: {room.has_hairdryer ? "Yes" : "No"}</p>
+              <p>Has Wifi: {room.has_wifi ? "Yes" : "No"}</p>
             </div>
             <ActionContainer>
               <div className="occupant-form">
