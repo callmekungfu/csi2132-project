@@ -64,9 +64,9 @@ const RoomsPage = () => {
       <Grid>
       {room?.map((b) => (
           <Link
-          to={link} 
+          to={link} key={b.room_id}
         >
-            <Card key={b.room_id}>
+            <Card >
               <h5>{b.room_title}</h5>
               <div>
                 <b>Description: </b> {b.room_description}
