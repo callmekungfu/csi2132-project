@@ -1,7 +1,8 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react';
 import { Card, Container, Grid, Title } from './BrandsPage';
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 interface RoomGetBody {
   data: IRoom[];
@@ -22,51 +23,86 @@ export interface IRoom {
   has_wifi: boolean;
 }
 
+const DateForm = styled.form`
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  .form-group {
+    margin: 0 12px;
+    label {
+      margin-right: 8px;
+    }
+  }
+`;
+
 const RoomsPage = () => {
   const { brandId, hotelId } = useParams();
-  const [room, setRooms] = useState<IRoom[]>(); 
+  const [room, setRooms] = useState<IRoom[]>();
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
   // const [date1, setDate1] = useState('');
   // const [date2, setDate2] = useState('');
-  const date1 = useRef(null);
-  const date2 = useRef(null);
-  const [link, setLink] = useState('')
 
   useEffect(() => {
     if (brandId && hotelId) {
-      loadBrandsData();
+      loadRoomsData();
     }
   }, [brandId, hotelId]);
 
-  const loadBrandsData = async () => {
-    const res = await fetch(
-      `http://localhost:8000/hotel-brands/${brandId}/hotels/${hotelId}/rooms`,
-    );
+  const loadRoomsData = async (link?: string) => {
+    const url =
+      link ??
+      `http://localhost:8000/hotel-brands/${brandId}/hotels/${hotelId}/rooms`;
+    const res = await fetch(url);
     const data: RoomGetBody = await res.json();
     setRooms(data.data);
   };
 
   const handleSubmit = () => {
-    console.log(date1.current.value, date2.current.value)
-    setLink(`/brands/${brandId}/hotels/${hotelId}/rooms?start_date=${date1.current.value}&end_date=${date2.current.value}}`)
-    console.log(link)
+    if (startDate > endDate) {
+      alert('ur date is wrong make start before end pls');
+      return;
+    }
+    loadRoomsData(
+      `http://localhost:8000/hotel-brands/${brandId}/hotels/${hotelId}/rooms?start_date=${startDate}&end_date=${endDate}`,
+    );
   };
 
-  return(
+  return (
     <Container>
       <Title>Brand Page</Title>
-      <form>
-        <input placeholder="start date" ref={date1} />
-        <input placeholder="end date" ref={date2} />
-      </form>
-      <button type="submit" onClick={handleSubmit}>
-        Submit Dates
-      </button>
+      <DateForm>
+        <div className="form-group">
+          {/* Start Date */}
+          <label htmlFor="startDate">Check In Date</label>
+          <input
+            type="date"
+            placeholder="Check In Date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.currentTarget.value)}
+          />
+        </div>
+        <div className="form-group">
+          {/* End Date */}
+          <label htmlFor="startDate">Check Out Date</label>
+          <input
+            type="date"
+            placeholder="Check Out Date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.currentTarget.value)}
+          />
+        </div>
+        <div className="form-group">
+          <button type="button" onClick={handleSubmit}>
+            Search
+          </button>
+        </div>
+      </DateForm>
+
       <Grid>
-      {room?.map((b) => (
-          <Link
-          to={link} key={b.room_id}
-        >
-            <Card >
+        {room?.map((b) => (
+          <Link to={'/'} key={b.room_id}>
+            <Card>
               <h5>{b.room_title}</h5>
               <div>
                 <b>Description: </b> {b.room_description}
