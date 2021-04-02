@@ -53,6 +53,12 @@ export const Card = styled.div`
     margin-top: 0;
     margin-bottom: 8px;
   }
+  &.success {
+    background-color: #a5d6a7;
+  }
+  &.warning {
+    background-color: #ffe082;
+  }
 `;
 
 const BrandsPage = () => {
@@ -74,7 +80,10 @@ const BrandsPage = () => {
       <Title>Brands Page</Title>
       <Grid>
         {brands?.map((b) => (
-          <Link to={`/brands/${b.hotel_brand_id}/hotels`} key={b.hotel_brand_id}>
+          <Link
+            to={`/brands/${b.hotel_brand_id}/hotels`}
+            key={b.hotel_brand_id}
+          >
             <Card>
               <h5>{b.brand_name}</h5>
               <div>

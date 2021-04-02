@@ -23,12 +23,12 @@ const ActionContainer = styled.div`
   }
 `;
 
-function useQuery() {
+export function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 const RoomDetailsPage = () => {
-  const { brandId, hotelId, roomId } = useParams();
+  const { brandId, hotelId, roomId } = useParams<any>();
   let history = useHistory();
   const [room, setRoom] = useState<IRoom>();
   const [occupant, setOccupant] = useState<number>(1);
@@ -78,14 +78,14 @@ const RoomDetailsPage = () => {
           <RoomDetails>
             <div>
               <strong>{room.room_description}</strong>
-              <p>Can Extend: {room.can_extend ? "Yes" : "No"}</p>
-              <p>Has Mountain View: {room.mountain_view ? "Yes" : "No"}</p>
-              <p>Has Ocean View: {room.ocean_view ? "Yes" : "No"}</p>
-              <p>Has Tv: {room.has_tv ? "Yes" : "No"}</p>
-              <p>Has AC: {room.has_ac ? "Yes" : "No"}</p>
-              <p>Has Mini Bar: {room.has_mini_bar ? "Yes" : "No"}</p>
-              <p>Has Hairdryer: {room.has_hairdryer ? "Yes" : "No"}</p>
-              <p>Has Wifi: {room.has_wifi ? "Yes" : "No"}</p>
+              <p>Can Extend: {room.can_extend ? 'Yes' : 'No'}</p>
+              <p>Has Mountain View: {room.mountain_view ? 'Yes' : 'No'}</p>
+              <p>Has Ocean View: {room.ocean_view ? 'Yes' : 'No'}</p>
+              <p>Has Tv: {room.has_tv ? 'Yes' : 'No'}</p>
+              <p>Has AC: {room.has_ac ? 'Yes' : 'No'}</p>
+              <p>Has Mini Bar: {room.has_mini_bar ? 'Yes' : 'No'}</p>
+              <p>Has Hairdryer: {room.has_hairdryer ? 'Yes' : 'No'}</p>
+              <p>Has Wifi: {room.has_wifi ? 'Yes' : 'No'}</p>
             </div>
             <ActionContainer>
               <div className="occupant-form">

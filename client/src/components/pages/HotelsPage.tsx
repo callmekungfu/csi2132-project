@@ -25,7 +25,7 @@ export interface OfficeAddress {
 }
 
 const HotelsPage = () => {
-  const { brandId } = useParams();
+  const { brandId } = useParams<any>();
   const [hotels, setHotels] = useState<IHotel[]>();
 
   useEffect(() => {

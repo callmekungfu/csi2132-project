@@ -1,7 +1,8 @@
 import { Card, Container, Grid, Title } from './BrandsPage';
-import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useParams, Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useQuery } from './RoomDetailsPage';
 
 interface RoomGetBody {
   data: IRoom[];
@@ -34,11 +35,24 @@ const DateForm = styled.form`
   }
 `;
 
+const ReturnBtn = styled.a`
+  margin-left: auto;
+`;
+
 const RoomsPage = () => {
-  const { brandId, hotelId } = useParams();
+  const query = useQuery();
+  const { brandId, hotelId } = useParams<any>();
   const [room, setRooms] = useState<IRoom[]>();
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
+
+  useEffect(() => {
+    if (query.has('start_date') && query.has('end_date')) {
+      setStartDate(query.get('start_date'));
+      setEndDate(query.get('end_date'));
+      handleSubmit();
+    }
+  }, [query]);
 
   const loadRoomsData = async (link?: string) => {
     const url =
@@ -88,6 +102,12 @@ const RoomsPage = () => {
             Search
           </button>
         </div>
+
+        {query.get('from_checkin') === 'true' && (
+          <ReturnBtn>
+            <Link to="/lookup">Return to Bookings Lookup</Link>
+          </ReturnBtn>
+        )}
       </DateForm>
 
       <Grid>
