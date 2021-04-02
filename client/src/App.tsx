@@ -6,6 +6,7 @@ import HomePage from './components/pages/HomePage';
 import HotelsPage from './components/pages/HotelsPage';
 import RoomDetailsPage from './components/pages/RoomDetailsPage';
 import RoomsPage from './components/pages/RoomsPage';
+import LookupPage from './components/pages/LookupPage';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
               </li>
               <li>
                 <Link to="/check-in">Customer</Link>
+              </li>
+              <li>
+                <Link to="/lookup">Employees</Link>
               </li>
               <li>
                 <Link to="/brands">Brands</Link>
@@ -37,6 +41,9 @@ function App() {
             </Route>
             <Route path="/brands/:brandId/hotels">
               <HotelsPage />
+            </Route>
+            <Route path="/lookup">
+              <LookupPage/>
             </Route>
             <Route path="/brands">
               <BrandsPage />
