@@ -33,11 +33,21 @@ export const selectAllRoomsInHotelFilterByDateRangeQuery = (
     filter = `h.hotel_id = ${hotelId} and h.hotel_brand_id = ${brandId}`;
   }
 
-  return `select r.room_id, room_title, room_description, price, mountain_view, ocean_view, can_extend, has_tv, has_ac, has_mini_bar, has_hairdryer, has_wifi
-  from rooms r
-      inner join hotels h on r.hotel_id = h.hotel_id
-      left join bookings b on r.room_id = b.room_id
-  where ${filter} and (coalesce(b.booking_id, -1) = -1 or (not ((date '${start_date}', date '${end_date}') OVERLAPS (b.start_date, b.end_date))))`;
+  return `select r.room_id,
+  room_title,
+  room_description,
+  price,
+  mountain_view,
+  ocean_view,
+  can_extend,
+  has_tv,
+  has_ac,
+  has_mini_bar,
+  has_hairdryer,
+  has_wifi
+from rooms r
+    inner join hotels h on r.hotel_id = h.hotel_id
+where ${filter} and (select count(*) from bookings b where b.room_id = r.room_id and (date '${start_date}', date '${end_date}') OVERLAPS (b.start_date, b.end_date)) = 0;`;
 };
 
 export const selectRoomByRoomIdAndHotelIdQuery = (

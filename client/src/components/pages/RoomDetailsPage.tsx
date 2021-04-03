@@ -51,7 +51,7 @@ const RoomDetailsPage = () => {
       return;
     }
     const data = {
-      customer_id: 1,
+      customer_id: Math.floor(Math.random() * 39) + 1,
       room_id: roomId,
       occupant_count: occupant,
       start_date: s,
@@ -67,6 +67,7 @@ const RoomDetailsPage = () => {
         body: JSON.stringify(data),
       },
     );
+    alert('Your room has been booked!');
     history.push('/brands');
   };
 

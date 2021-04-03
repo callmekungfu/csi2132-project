@@ -16,16 +16,10 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/check-in">Customer</Link>
-              </li>
-              <li>
                 <Link to="/lookup">Employees</Link>
               </li>
               <li>
-                <Link to="/brands">Brands</Link>
+                <Link to="/brands">Customer</Link>
               </li>
             </ul>
           </nav>
@@ -43,7 +37,7 @@ function App() {
               <HotelsPage />
             </Route>
             <Route path="/lookup">
-              <LookupPage/>
+              <LookupPage />
             </Route>
             <Route path="/brands">
               <BrandsPage />

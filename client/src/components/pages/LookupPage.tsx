@@ -40,6 +40,8 @@ const Header = styled.div`
 const LookupPage = () => {
   const employeeId = 1;
   const today = new Date().toISOString().split('T')[0];
+  const tmr = new Date();
+  tmr.setDate(tmr.getDate() + 1);
   const [bookings, setBookings] = useState<IBooking[]>();
   const [rawBookings, setRawBookings] = useState<IBooking[]>();
 
@@ -83,7 +85,9 @@ const LookupPage = () => {
       <Header>
         <Title>Bookings</Title>
         <Link
-          to={`/brands/2/hotels/1/rooms?start_date=${today}&end_date=${today}&from_checkin=true`}
+          to={`/brands/2/hotels/1/rooms?start_date=${today}&end_date=${
+            tmr.toISOString().split('T')[0]
+          }&from_checkin=true`}
         >
           See available Rooms
         </Link>

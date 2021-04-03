@@ -35,7 +35,7 @@ const DateForm = styled.form`
   }
 `;
 
-const ReturnBtn = styled.a`
+const ReturnBtn = styled.div`
   margin-left: auto;
 `;
 
@@ -50,9 +50,9 @@ const RoomsPage = () => {
     if (query.has('start_date') && query.has('end_date')) {
       setStartDate(query.get('start_date'));
       setEndDate(query.get('end_date'));
-      handleSubmit();
+      handleSubmit(query.get('start_date'), query.get('end_date'));
     }
-  }, [query]);
+  }, []);
 
   const loadRoomsData = async (link?: string) => {
     const url =
@@ -63,13 +63,15 @@ const RoomsPage = () => {
     setRooms(data.data);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (start?: string, end?: string) => {
     if (startDate > endDate) {
       alert('ur date is wrong make start before end pls');
       return;
     }
     loadRoomsData(
-      `http://localhost:8000/hotel-brands/${brandId}/hotels/${hotelId}/rooms?start_date=${startDate}&end_date=${endDate}`,
+      `http://localhost:8000/hotel-brands/${brandId}/hotels/${hotelId}/rooms?start_date=${
+        start ?? startDate
+      }&end_date=${end ?? endDate}`,
     );
   };
 
@@ -98,7 +100,7 @@ const RoomsPage = () => {
           />
         </div>
         <div className="form-group">
-          <button type="button" onClick={handleSubmit}>
+          <button type="button" onClick={() => handleSubmit()}>
             Search
           </button>
         </div>
