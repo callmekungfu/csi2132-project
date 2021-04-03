@@ -75,7 +75,7 @@ const RoomsPage = () => {
 
   return (
     <Container>
-      <Title>Brand Page</Title>
+      <Title>Rooms Page</Title>
       <DateForm>
         <div className="form-group">
           {/* Start Date */}

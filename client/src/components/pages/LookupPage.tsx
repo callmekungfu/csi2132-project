@@ -113,10 +113,10 @@ const LookupPage = () => {
               <b>Checked In:</b> {b.checked_in.toString()}
             </div>
             <div>
-              <b>Start Date: </b> {b.start_date}
+              <b>Start Date: </b> {b.start_date.split('T')[0]}
             </div>
             <div>
-              <b>End Date: </b> {b.end_date}
+              <b>End Date: </b> {b.end_date.split('T')[0]}
             </div>
             <BookingBtn
               onClick={() => handleClick(b.booking_id)}
